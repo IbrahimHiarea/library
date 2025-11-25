@@ -15,6 +15,7 @@ interface User {
 
 interface AuthContextType {
   user: User | null;
+  isAuthenticated: boolean;
   login: (userData: User) => void;
   logout: () => void;
 }
@@ -37,8 +38,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const login = (userData: User) => setUser(userData);
   const logout = () => setUser(null);
 
+  const isAuthenticated = !!user; // true if user exists
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
