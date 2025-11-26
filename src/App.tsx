@@ -1,4 +1,4 @@
-import { AuthProvider } from "@auth/provider/AuthProvider";
+import { AuthProvider } from "@providers/AuthProvider";
 import { IntlProvider } from "@providers/IntlProvider";
 import { LanguageProvider } from "@providers/LanguageProvider";
 import { QueryProvider } from "@providers/ReactQueryProvider";

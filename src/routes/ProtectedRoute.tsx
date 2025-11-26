@@ -1,4 +1,4 @@
-import { useAuth } from "@auth/provider/AuthProvider";
+import { useAuth } from "@providers/AuthProvider";
 import { type ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 
