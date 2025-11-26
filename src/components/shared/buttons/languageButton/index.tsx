@@ -1,12 +1,11 @@
-import { ListItemIcon, Menu, MenuItem } from "@mui/material";
+import { Menu, MenuItem } from "@mui/material";
+import { useLanguage, type LanguageType } from "@providers/LanguageProvider";
 import { useState } from "react";
-import { FaFlag, FaFlagUsa } from "react-icons/fa"; // USA for "en", custom for "ar"
 import { MdLanguage } from "react-icons/md";
 import { AppButton } from "..";
-import { useLanguage, type LanguageType } from "@providers/LanguageProvider";
 
 export const LanguageButton = () => {
-  const { language, changeLanguage } = useLanguage();
+  const { changeLanguage } = useLanguage();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);
@@ -27,23 +26,75 @@ export const LanguageButton = () => {
       <AppButton
         onClick={handleClick}
         startIcon={<MdLanguage />}
-        sx={{ minWidth: 40, padding: "6px 12px" }}
-      >
-        {language.toUpperCase()}
-      </AppButton>
+        sx={{
+          minHeight: "35px",
+          minWidth: "35px",
+          padding: 0,
+          backgroundColor: (theme) => theme.palette.background.default,
+          color: (theme) => theme.palette.text.primary,
+          border: "1px solid",
+          borderColor: (theme) => theme.palette.text.secondary,
+          borderRadius: "10px",
 
-      <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-        <MenuItem onClick={() => handleSelect("en")}>
-          <ListItemIcon>
-            <FaFlagUsa />
-          </ListItemIcon>
-          EN
+          "&:hover": {
+            backgroundColor: (theme) => theme.palette.primary.main,
+            color: "white",
+            border: "none",
+          },
+
+          "& .MuiButton-startIcon": {
+            margin: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          },
+
+          "& .MuiButton-endIcon": {
+            margin: 0,
+          },
+        }}
+      />
+
+      <Menu
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        anchorReference="anchorPosition"
+        anchorPosition={{ top: 60, left: 1550 }}
+        PaperProps={{
+          sx: {
+            backgroundColor: (theme) => theme.palette.background.default,
+            width: 120,
+            borderRadius: "10px",
+          },
+        }}
+      >
+        <MenuItem
+          onClick={() => handleSelect("en")}
+          sx={{
+            borderRadius: "10px",
+            fontSize: "14px",
+            margin: "0px 4px",
+            "&:hover": {
+              backgroundColor: (theme) => theme.palette.primary.light,
+            },
+          }}
+        >
+          English
         </MenuItem>
-        <MenuItem onClick={() => handleSelect("ar")}>
-          <ListItemIcon>
-            <FaFlag />
-          </ListItemIcon>
-          AR
+        <MenuItem
+          onClick={() => handleSelect("ar")}
+          sx={{
+            borderRadius: "10px",
+            fontSize: "14px",
+            margin: "0px 4px",
+
+            "&:hover": {
+              backgroundColor: (theme) => theme.palette.primary.light,
+            },
+          }}
+        >
+          العربية
         </MenuItem>
       </Menu>
     </>

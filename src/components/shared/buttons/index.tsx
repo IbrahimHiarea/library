@@ -41,7 +41,7 @@ export const AppButton: FC<AppButtonProps> = ({
       endIcon={endIcon}
       disabled={disabled}
       fullWidth={fullWidth}
-      sx={sx}
+      sx={{ borderRadius: "10px", textTransform: "none", ...sx }}
     >
       {children}
     </Button>

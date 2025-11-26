@@ -4,6 +4,7 @@ import { LanguageProvider } from "@providers/LanguageProvider";
 import { QueryProvider } from "@providers/ReactQueryProvider";
 import { ThemeProvider } from "@providers/ThemeProvider";
 import { ToastProvider } from "@providers/ToastProvider";
+import { AppRoutes } from "@routes/AppRoutes";
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
             <QueryProvider>
               <AuthProvider>
                 <ToastProvider>
-                  <></>
+                  <AppRoutes />
                 </ToastProvider>
               </AuthProvider>
             </QueryProvider>

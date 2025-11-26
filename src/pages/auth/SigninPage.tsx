@@ -1,0 +1,223 @@
+import { AppButton } from "@components/shared/buttons";
+import { LanguageButton } from "@components/shared/buttons/languageButton";
+import { ThemeToggleButton } from "@components/shared/buttons/themeButton";
+import { AppInputFiled } from "@components/shared/input/inputField";
+import { AppTab, AppTabs } from "@components/shared/tabs";
+import { Box, styled, Typography } from "@mui/material";
+import { useAuth } from "@providers/AuthProvider";
+import { useCallback, useState } from "react";
+import { LuLibrary } from "react-icons/lu";
+import { useNavigate } from "react-router-dom";
+
+export const Container = styled("div")(({ theme }) => ({
+  background: theme.palette.background.default,
+  height: "100vh",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+export default function SigninPage() {
+  // *@ Component Hooks
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  // *@ Component States
+  const [tab, setTab] = useState(0);
+
+  // * Form states
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+
+  // *@ Component Functions
+  // * Handle Tab Change
+  const handleChange = useCallback(
+    (_: React.SyntheticEvent, newValue: number) => {
+      setTab(newValue);
+      setEmail("");
+      setPassword("");
+      setFullName("");
+    },
+    []
+  );
+
+  // * Handle SignIn
+  const handleSignIn = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Sign In:", { email, password });
+    login({
+      id: "Some uuid token",
+      fullName: fullName,
+      email: email,
+      token: password,
+    });
+    navigate("/home");
+  };
+
+  return (
+    <Container sx={{ position: "relative" }}>
+      <Box
+        sx={{
+          position: "absolute",
+          top: 20,
+          right: 20,
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+        }}
+      >
+        <ThemeToggleButton />
+        <LanguageButton />
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: (theme) => theme.palette.background.paper,
+          borderRadius: "12px",
+          width: "450px",
+        }}
+      >
+        {/* Header */}
+        <Box padding={"24px"} textAlign={"center"}>
+          <Typography
+            sx={{
+              color: (theme) => theme.palette.primary.main,
+              fontSize: "24px",
+              fontWeight: 700,
+              margin: 0,
+              marginBottom: "8px",
+            }}
+          >
+            <LuLibrary /> LibraryHub
+          </Typography>
+          <Typography
+            sx={{
+              color: (theme) => theme.palette.text.primary,
+              fontSize: "24px",
+              fontWeight: 600,
+              margin: 0,
+              marginTop: "4px",
+            }}
+          >
+            Welcome to LibraryHub
+          </Typography>
+          <Typography
+            sx={{
+              color: (theme) => theme.palette.text.secondary,
+              fontSize: "14px",
+              fontWeight: 500,
+              margin: 0,
+              marginTop: "4px",
+            }}
+          >
+            Sign in to your account
+          </Typography>
+        </Box>
+
+        {/* Tabs */}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "4px 24px",
+          }}
+        >
+          <AppTabs
+            value={tab}
+            onChange={handleChange}
+            variant="scrollable"
+            scrollButtons={false}
+            sx={{
+              backgroundColor: "#2d3643",
+              width: "100%",
+              borderRadius: "10px",
+            }}
+          >
+            <AppTab label="Sign In" />
+            <AppTab label="Sign Up" />
+          </AppTabs>
+        </Box>
+
+        {/* Tabs Panel */}
+        <Box
+          component="form"
+          onSubmit={handleSignIn}
+          sx={{ padding: "12px 24px 24px" }}
+        >
+          {tab === 0 && (
+            <>
+              <AppInputFiled
+                fullWidth
+                label="Email"
+                type="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+
+              <AppInputFiled
+                name="password"
+                fullWidth
+                label={"Password"}
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+
+              <AppButton
+                type="submit"
+                variant="contained"
+                fullWidth
+                sx={{ mt: 2 }}
+              >
+                Sign In
+              </AppButton>
+            </>
+          )}
+
+          {/* Sign Up */}
+          {tab === 1 && (
+            <>
+              <AppInputFiled
+                fullWidth
+                name="fullName"
+                label={"full Name"}
+                type="text"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+              />
+
+              <AppInputFiled
+                name="email"
+                fullWidth
+                label={"Email"}
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+
+              <AppInputFiled
+                name="password"
+                fullWidth
+                label={"Password"}
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+
+              <AppButton
+                type="submit"
+                variant="contained"
+                fullWidth
+                sx={{ mt: 2 }}
+              >
+                Sign Up
+              </AppButton>
+            </>
+          )}
+        </Box>
+      </Box>
+    </Container>
+  );
+}

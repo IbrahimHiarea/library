@@ -27,7 +27,7 @@ interface ThemeProviderProps {
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const [mode, setMode] = useState<ThemeMode>(
-    (localStorage.getItem("theme") as ThemeMode) || "light"
+    (localStorage.getItem("theme") as ThemeMode) || "dark"
   );
 
   useEffect(() => {
@@ -41,24 +41,25 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     const palette = {
       mode,
       primary: {
-        main: mode === "light" ? "#1976d2" : "#90caf9",
-        light: mode === "light" ? "#42a5f5" : "#e3f2fd",
-        dark: mode === "light" ? "#1565c0" : "#42a5f5",
+        main: mode === "light" ? "#1976d2" : "#1d64c9",
+        light: mode === "light" ? "#42a5f5" : "#1d64c9",
+        dark: mode === "light" ? "#1565c0" : "#163969",
         contrastText: "#fff",
       },
       secondary: {
-        main: mode === "light" ? "#9c27b0" : "#ce93d8",
+        main: mode === "light" ? "#9c27b0" : "#f4eee1",
         light: mode === "light" ? "#ba68c8" : "#f3e5f5",
         dark: mode === "light" ? "#7b1fa2" : "#ab47bc",
         contrastText: "#fff",
       },
       background: {
-        default: mode === "light" ? "#f5f5f5" : "#121212",
-        paper: mode === "light" ? "#fff" : "#1e1e1e",
+        default: mode === "light" ? "#fbf9f4" : "#151d28",
+        light: mode === "light" ? "#f5f5f5" : "#2d3643",
+        paper: mode === "light" ? "#fff" : "#1f2733",
       },
       text: {
-        primary: mode === "light" ? "#000" : "#fff",
-        secondary: mode === "light" ? "#555" : "#ccc",
+        primary: mode === "light" ? "#1D2530" : "#fff",
+        secondary: mode === "light" ? "#555" : "#98a4b3",
       },
       success: {
         main: mode === "light" ? "#4caf50" : "#81c784",

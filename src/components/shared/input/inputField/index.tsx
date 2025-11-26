@@ -43,7 +43,26 @@ export const AppInputFiled: FC<AppInputFiledProps> = ({
       placeholder={placeholder}
       disabled={disabled}
       fullWidth={fullWidth}
-      sx={sx}
+      margin="normal"
+      sx={{
+        backgroundColor: (theme) => theme.palette.background.default,
+        color: (theme) => theme.palette.text.primary,
+        borderRadius: "8px",
+        "& .MuiOutlinedInput-root": {
+          height: "40px",
+          borderRadius: "8px",
+        },
+
+        "& .MuiInputLabel-root": {
+          top: "-6px",
+        },
+
+        "& .MuiInputLabel-shrink": {
+          top: 0,
+        },
+
+        ...sx,
+      }}
       InputProps={{
         startAdornment: startIcon ? (
           <InputAdornment position="start">{startIcon}</InputAdornment>
