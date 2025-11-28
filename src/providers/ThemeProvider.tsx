@@ -63,9 +63,11 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
       },
       success: {
         main: mode === "light" ? "#4caf50" : "#81c784",
+        dark: mode === "light" ? "#4caf50" : "#1e3335",
       },
       error: {
         main: mode === "light" ? "#f44336" : "#e57373",
+        dark: mode === "light" ? "#f44336" : "#292631",
       },
       warning: {
         main: mode === "light" ? "#ff9800" : "#ffb74d",

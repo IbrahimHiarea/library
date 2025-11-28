@@ -10,7 +10,7 @@ export const ToastProvider = ({ children }: ToastProviderProps) => {
     <>
       {children}
       <Toaster
-        position="bottom-left"
+        position="bottom-right"
         richColors
         toastOptions={{
           duration: 4000,

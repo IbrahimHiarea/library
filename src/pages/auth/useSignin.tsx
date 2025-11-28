@@ -1,7 +1,8 @@
-import { useAuth, type User } from "@providers/AuthProvider";
+import { useAuth } from "@providers/AuthProvider";
 import { toastError, toastSuccess } from "@providers/ToastProvider";
 import { API_URL } from "@services/apiUrls";
 import axiosInstance from "@services/axiosInstance";
+import type { IUser } from "types/user";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -37,7 +38,7 @@ export function useSignin() {
     try {
       if (tab === 0) {
         /// Login
-        const res = await axiosInstance.get<User[]>(API_URL.user, {
+        const res = await axiosInstance.get<IUser[]>(API_URL.user, {
           params: { email, password },
         });
 
@@ -58,15 +59,13 @@ export function useSignin() {
         navigate("/home");
       } else {
         // Signup
-        const res = await axiosInstance.post<User>(API_URL.user, {
+        const res = await axiosInstance.post<IUser>(API_URL.user, {
           fullName,
           email,
           password,
         });
 
         const newUser = res.data;
-
-        console.log({ newUser });
 
         login({
           id: newUser.id,

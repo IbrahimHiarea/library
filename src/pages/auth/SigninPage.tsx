@@ -130,6 +130,7 @@ export default function SigninPage() {
                 name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
 
               <AppInputFiled
@@ -139,6 +140,7 @@ export default function SigninPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
 
               <AppButton
@@ -162,6 +164,7 @@ export default function SigninPage() {
                 type="text"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
+                required
               />
 
               <AppInputFiled
@@ -171,6 +174,7 @@ export default function SigninPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
 
               <AppInputFiled
@@ -180,6 +184,7 @@ export default function SigninPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
 
               <AppButton

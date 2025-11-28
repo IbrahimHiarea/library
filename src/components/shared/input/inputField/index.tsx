@@ -18,6 +18,7 @@ interface AppInputFiledProps {
   placeholder?: string;
   disabled?: boolean;
   fullWidth?: boolean;
+  required?: boolean;
 }
 
 export const AppInputFiled: FC<AppInputFiledProps> = ({
@@ -32,6 +33,7 @@ export const AppInputFiled: FC<AppInputFiledProps> = ({
   placeholder,
   disabled = false,
   fullWidth = true,
+  required = false,
 }) => {
   return (
     <TextField
@@ -44,6 +46,7 @@ export const AppInputFiled: FC<AppInputFiledProps> = ({
       disabled={disabled}
       fullWidth={fullWidth}
       margin="normal"
+      required={required}
       sx={{
         backgroundColor: (theme) => theme.palette.background.default,
         color: (theme) => theme.palette.text.primary,

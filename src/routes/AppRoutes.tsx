@@ -8,6 +8,9 @@ import { PublicRoute } from "./PublicRoute";
 // * Auth Pages
 const SigninPage = lazy(() => import("@pages/auth/SigninPage"));
 
+// * Home
+const HomePage = lazy(() => import("@pages/home/HomePage"));
+
 export const AppRoutes = () => {
   return (
     <BrowserRouter>
@@ -28,7 +31,7 @@ export const AppRoutes = () => {
           path="/home"
           element={
             <ProtectedRoute>
-              <>Home</>
+              <HomePage />
             </ProtectedRoute>
           }
         />

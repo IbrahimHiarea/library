@@ -59,8 +59,8 @@ export const LanguageButton = () => {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        anchorReference="anchorPosition"
-        anchorPosition={{ top: 60, left: 1550 }}
+        // anchorReference="anchorPosition"
+        // anchorPosition={{ top: 60, left: 1550 }}
         PaperProps={{
           sx: {
             backgroundColor: (theme) => theme.palette.background.default,

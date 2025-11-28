@@ -5,11 +5,9 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import type { IUser } from "types/user";
 
-export interface User {
-  id: string;
-  fullName: string;
-  email: string;
+export interface User extends IUser {
   token: string;
 }
 
@@ -35,8 +33,18 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
-  const login = (userData: User) => setUser(userData);
-  const logout = () => setUser(null);
+  const login = (userData: User) =>
+    setUser({
+      id: userData.id,
+      email: userData.email,
+      fullName: userData.fullName,
+      token: userData.token,
+    });
+
+  const logout = () => {
+    setUser(null);
+    localStorage.clear();
+  };
 
   const isAuthenticated = !!user; // true if user exists
 
