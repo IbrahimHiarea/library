@@ -4,7 +4,7 @@ import axios, {
   type AxiosResponse,
 } from "axios";
 
-export const API_BASE_URL = ""; // TODO
+export const API_BASE_URL = "http://localhost:5000";
 
 // Create axios instance
 const axiosInstance: AxiosInstance = axios.create({
@@ -36,7 +36,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => {
     // Handle response data
-    return response.data;
+    return response;
   },
   (error: AxiosError) => {
     // Handle errors

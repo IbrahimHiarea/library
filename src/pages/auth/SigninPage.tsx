@@ -4,10 +4,8 @@ import { ThemeToggleButton } from "@components/shared/buttons/themeButton";
 import { AppInputFiled } from "@components/shared/input/inputField";
 import { AppTab, AppTabs } from "@components/shared/tabs";
 import { Box, styled, Typography } from "@mui/material";
-import { useAuth } from "@providers/AuthProvider";
-import { useCallback, useState } from "react";
 import { LuLibrary } from "react-icons/lu";
-import { useNavigate } from "react-router-dom";
+import { useSignin } from "./useSignin";
 
 export const Container = styled("div")(({ theme }) => ({
   background: theme.palette.background.default,
@@ -19,41 +17,19 @@ export const Container = styled("div")(({ theme }) => ({
 
 export default function SigninPage() {
   // *@ Component Hooks
-  const { login } = useAuth();
-  const navigate = useNavigate();
+  const {
+    tab,
+    email,
+    fullName,
+    password,
 
-  // *@ Component States
-  const [tab, setTab] = useState(0);
+    setEmail,
+    setFullName,
+    setPassword,
 
-  // * Form states
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [fullName, setFullName] = useState("");
-
-  // *@ Component Functions
-  // * Handle Tab Change
-  const handleChange = useCallback(
-    (_: React.SyntheticEvent, newValue: number) => {
-      setTab(newValue);
-      setEmail("");
-      setPassword("");
-      setFullName("");
-    },
-    []
-  );
-
-  // * Handle SignIn
-  const handleSignIn = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Sign In:", { email, password });
-    login({
-      id: "Some uuid token",
-      fullName: fullName,
-      email: email,
-      token: password,
-    });
-    navigate("/home");
-  };
+    handleChange,
+    handleSignIn,
+  } = useSignin();
 
   return (
     <Container sx={{ position: "relative" }}>

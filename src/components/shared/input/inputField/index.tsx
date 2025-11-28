@@ -61,6 +61,12 @@ export const AppInputFiled: FC<AppInputFiledProps> = ({
           top: 0,
         },
 
+        "& input:-webkit-autofill": {
+          WebkitBoxShadow: "0 0 0px 1000px transparent inset",
+          WebkitTextFillColor: (theme) => theme.palette.text.primary,
+          transition: "background-color 9999s ease-in-out 0s",
+        },
+
         ...sx,
       }}
       InputProps={{

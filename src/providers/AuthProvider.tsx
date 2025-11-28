@@ -6,11 +6,11 @@ import {
   type ReactNode,
 } from "react";
 
-interface User {
+export interface User {
   id: string;
   fullName: string;
-  email?: string;
-  token?: string;
+  email: string;
+  token: string;
 }
 
 interface AuthContextType {
