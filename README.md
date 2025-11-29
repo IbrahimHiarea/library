@@ -15,6 +15,9 @@ A simple and modern Library Management System where users can register, log in, 
 ## Tech Stack
 
 - **Frontend**: React + TypeScript + Vite
+- **UI Library**: MUI (Material-UI)
+- **Icons**: React Icons
+- **Internationalization**: react-intl
 - **Mock Backend**: `json-server` (full REST API simulation from a JSON file)
 
 ## Prerequisites
