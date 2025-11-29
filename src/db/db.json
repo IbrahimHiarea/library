@@ -41,8 +41,32 @@
           "borrowedAt": "2025-11-29T11:43:37.392Z",
           "dueDate": "2025-12-04T11:43:37.392Z",
           "returned": true
+        },
+        {
+          "id": "mika3esc8ltbogru5zq",
+          "bookId": "d2d9a215-5a3c-41dd-8399-30a400c0a64f",
+          "book": {
+            "id": "d2d9a215-5a3c-41dd-8399-30a400c0a64f",
+            "title": "The Great Gatsby",
+            "author": "F. Scott Fitzgerald",
+            "isbn": "978-0743273565",
+            "description": "A classic American novel set in the Jazz Age",
+            "coverImage": "https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=400&h=600&fit=crop",
+            "availableCopies": 4,
+            "totalCopies": 5,
+            "rate": 4.6
+          },
+          "borrowedAt": "2025-11-29T12:39:30.972Z",
+          "dueDate": "2025-12-04T12:39:30.972Z",
+          "returned": true
         }
       ]
+    },
+    {
+      "id": "261f",
+      "fullName": "asd",
+      "email": "asdj@gmail.com",
+      "password": "123456"
     }
   ],
   "books": [

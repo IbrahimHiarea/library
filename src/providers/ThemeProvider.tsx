@@ -11,6 +11,10 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { useLanguage } from "./LanguageProvider"; // import your language context
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
+import rtlPlugin from "stylis-plugin-rtl";
 
 export type ThemeMode = "light" | "dark";
 
@@ -26,6 +30,7 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
+  const { direction } = useLanguage();
   const [mode, setMode] = useState<ThemeMode>(
     (localStorage.getItem("theme") as ThemeMode) || "dark"
   );
@@ -36,6 +41,16 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
   const toggleTheme = () =>
     setMode((prev) => (prev === "light" ? "dark" : "light"));
+
+  // Create RTL cache for Emotion
+  const cacheRtl = useMemo(
+    () =>
+      createCache({
+        key: direction === "rtl" ? "muirtl" : "mui",
+        stylisPlugins: direction === "rtl" ? [rtlPlugin] : [],
+      }),
+    [direction]
+  );
 
   const theme: Theme = useMemo(() => {
     const palette = {
@@ -77,13 +92,15 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
       },
     };
 
-    return createTheme({ palette });
-  }, [mode]);
+    return createTheme({ palette, direction });
+  }, [mode, direction]);
 
   return (
-    <ThemeContext.Provider value={{ mode, toggleTheme }}>
-      <MUIThemeProvider theme={theme}>{children}</MUIThemeProvider>
-    </ThemeContext.Provider>
+    <CacheProvider value={cacheRtl}>
+      <ThemeContext.Provider value={{ mode, toggleTheme }}>
+        <MUIThemeProvider theme={theme}>{children}</MUIThemeProvider>
+      </ThemeContext.Provider>
+    </CacheProvider>
   );
 };
 

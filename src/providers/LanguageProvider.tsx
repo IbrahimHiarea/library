@@ -11,6 +11,7 @@ export type LanguageType = "ar" | "en";
 interface LanguageContextType {
   language: LanguageType;
   changeLanguage: (lang: LanguageType) => void;
+  direction: "ltr" | "rtl";
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
@@ -26,14 +27,17 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
     (localStorage.getItem("language") as LanguageType) || "en"
   );
 
+  const direction = language === "ar" ? "rtl" : "ltr";
+
   useEffect(() => {
     localStorage.setItem("language", language);
-  }, [language]);
+    document.documentElement.dir = direction; // set HTML direction
+  }, [language, direction]);
 
   const changeLanguage = (lang: LanguageType) => setLanguage(lang);
 
   return (
-    <LanguageContext.Provider value={{ language, changeLanguage }}>
+    <LanguageContext.Provider value={{ language, changeLanguage, direction }}>
       {children}
     </LanguageContext.Provider>
   );

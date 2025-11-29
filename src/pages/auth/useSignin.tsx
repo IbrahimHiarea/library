@@ -2,15 +2,17 @@ import { useAuth } from "@providers/AuthProvider";
 import { toastError, toastSuccess } from "@providers/ToastProvider";
 import { API_URL } from "@services/apiUrls";
 import axiosInstance from "@services/axiosInstance";
-import type { IUser } from "types/user";
 import { useCallback, useState } from "react";
+import { useIntl } from "react-intl";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import type { IUser } from "types/user";
 
 export function useSignin() {
   // *@ Component Hooks
   const { login } = useAuth();
   const navigate = useNavigate();
+  const { formatMessage } = useIntl();
 
   // *@ Component States
   const [tab, setTab] = useState(0);
@@ -45,7 +47,8 @@ export function useSignin() {
         });
 
         if (!res.data || res.data.length === 0) {
-          toastError("Wrong credentials");
+          toastError(formatMessage({ id: "toast.wrongCredentials" }));
+          setIsLoading(false);
           return;
         }
 
@@ -76,11 +79,11 @@ export function useSignin() {
           token: newUser.email,
         });
 
-        toastSuccess("Account created successfully!");
+        toastSuccess(formatMessage({ id: "toast.createAccount.success" }));
         navigate("/home");
       }
     } catch (err: any) {
-      toast.error("Something went wrong. Please try again.");
+      toast.error(formatMessage({ id: "toast.createAccount.error" }));
       console.error(err);
     }
     setIsLoading(false);

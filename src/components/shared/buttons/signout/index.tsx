@@ -1,6 +1,7 @@
 import { useAuth } from "@providers/AuthProvider";
 import { LuLogOut } from "react-icons/lu";
 import { AppButton } from "..";
+import { FormattedMessage } from "react-intl";
 
 export const Signout = () => {
   const { logout } = useAuth();
@@ -40,7 +41,7 @@ export const Signout = () => {
         },
       }}
     >
-      Sign Out
+      <FormattedMessage id="signinPage.signOut" />
     </AppButton>
   );
 };

@@ -3,6 +3,7 @@ import { Box, Card, Typography } from "@mui/material";
 import { FaStar } from "react-icons/fa6";
 import { GoPerson } from "react-icons/go";
 import { LuBook } from "react-icons/lu";
+import { FormattedMessage } from "react-intl";
 import type { IBook, IBorrowedBook } from "types/books";
 
 interface IBookCardProps {
@@ -90,13 +91,15 @@ export function BookCard({
               p: "2px 10px",
             }}
           >
-            {!myBooks && isAvailable
-              ? "Available"
-              : !myBooks && !isAvailable
-              ? "Not Available"
-              : myBooks && borrowedBook?.returned
-              ? "Returned"
-              : "Not Returned"}
+            {!myBooks && isAvailable ? (
+              <FormattedMessage id="homePage.available" />
+            ) : !myBooks && !isAvailable ? (
+              <FormattedMessage id="homePage.notAvailable" />
+            ) : myBooks && borrowedBook?.returned ? (
+              <FormattedMessage id="homePage.returned" />
+            ) : (
+              <FormattedMessage id="homePage.notReturned" />
+            )}
           </Typography>
         </Box>
         <Typography
@@ -124,7 +127,7 @@ export function BookCard({
           display={"flex"}
           gap={1}
         >
-          <LuBook size={16} /> ISBN : {isbn}
+          <LuBook size={16} /> <FormattedMessage id="homePage.isbn" /> : {isbn}
         </Typography>
         <Typography variant="h2" fontSize={14} color="text.secondary" mt={2}>
           {description}
@@ -136,7 +139,8 @@ export function BookCard({
           color="text.secondary"
           mt={2}
         >
-          Copies : {availableCopies} / {totalCopies} available
+          <FormattedMessage id="homePage.copies" /> : {availableCopies} /{" "}
+          {totalCopies} <FormattedMessage id="homePage.available" />
         </Typography>
         <Typography
           display={!myBooks ? "none" : ""}
@@ -145,7 +149,8 @@ export function BookCard({
           color="text.secondary"
           mt={2}
         >
-          Borrow Date : {new Date(borrowedBook?.borrowedAt ?? "").toUTCString()}
+          <FormattedMessage id="homePage.borrowDate" /> :{" "}
+          {new Date(borrowedBook?.borrowedAt ?? "").toUTCString()}
         </Typography>
         <Typography
           display={!myBooks ? "none" : ""}
@@ -154,7 +159,8 @@ export function BookCard({
           color="text.secondary"
           mt={2}
         >
-          Due Date : {new Date(borrowedBook?.dueDate ?? "").toUTCString()}
+          <FormattedMessage id="homePage.dueDate" /> :{" "}
+          {new Date(borrowedBook?.dueDate ?? "").toUTCString()}
         </Typography>
       </Box>
 
@@ -175,7 +181,7 @@ export function BookCard({
           }}
           onClick={() => handleOnClick(book, borrowedBook)}
         >
-          View Details
+          <FormattedMessage id="homePage.viewDetails" />
         </AppButton>
       </Box>
     </Card>

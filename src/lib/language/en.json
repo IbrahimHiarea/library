@@ -1,1 +1,47 @@
-{}
+{
+  "signinPage": "------------------------------------signinPage------------------------------------",
+
+  "signinPage.welcome": "Welcome to LibraryHub",
+  "signinPage.signinToYourAccount": "Sign in to your account",
+
+  "signinPage.signIn": "Sign In",
+  "signinPage.signUp": "Sign Up",
+  "signinPage.signOut": "Sign Out",
+
+  "signinPage.label.email": "Email",
+  "signinPage.label.password": "Password",
+  "signinPage.label.fullName": "Full Name",
+
+  "homePage": "------------------------------------homePage------------------------------------",
+  "homePage.subTitle": "Discover, borrow, and enjoy a world of books",
+  "homePage.yourLib": "Your Library",
+  "homePage.browseBooks": "Browse Books",
+  "homePage.myBooks": "MY Books",
+  "homePage.searchBy": "Search By",
+
+  "homePage.title": "Title",
+  "homePage.author": "Author",
+  "homePage.isbn": "ISBN",
+
+  "homePage.available": "Available",
+  "homePage.notAvailable": "Not Available",
+  "homePage.returned": "Returned",
+  "homePage.notReturned": "Not Returned",
+
+  "homePage.copies": "Copies",
+  "homePage.borrowDate": "Borrow Date",
+  "homePage.dueDate": "Due Date",
+  "homePage.viewDetails": "View Details",
+
+  "homePage.description": "Description",
+  "homePage.borrow": "Borrow Book",
+  "homePage.return": "Return Book",
+
+  "toast": "------------------------------------toast------------------------------------",
+  "toast.borrowed.success": "You have borrowed {title} by {author} for 5 days",
+  "toast.return.success": "You have returned {title} by {author}",
+
+  "toast.wrongCredentials": "Wrong credentials",
+  "toast.createAccount.success": "Account created successfully!",
+  "toast.createAccount.error": "Something went wrong. Please try again"
+}

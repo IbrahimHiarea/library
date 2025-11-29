@@ -1,1 +1,46 @@
-{}
+{
+  "signinPage": "------------------------------------صفحة تسجيل الدخول------------------------------------",
+
+  "signinPage.welcome": "مرحبًا بك في LibraryHub",
+  "signinPage.signinToYourAccount": "تسجيل الدخول إلى حسابك",
+
+  "signinPage.signIn": "تسجيل الدخول",
+  "signinPage.signUp": "إنشاء حساب",
+  "signinPage.signOut": "تسجيل الخروج",
+
+  "signinPage.label.email": "البريد الإلكتروني",
+  "signinPage.label.password": "كلمة المرور",
+  "signinPage.label.fullName": "الاسم الكامل",
+
+  "homePage": "------------------------------------صفحة الرئيسية------------------------------------",
+  "homePage.subTitle": "اكتشف واستعِر واستمتع بعالم الكتب",
+  "homePage.yourLib": "مكتبتك",
+  "homePage.browseBooks": "تصفح الكتب",
+  "homePage.myBooks": "كتبي",
+  "homePage.searchBy": "البحث بواسطة",
+
+  "homePage.title": "العنوان",
+  "homePage.author": "المؤلف",
+  "homePage.isbn": "رقم الكتاب (ISBN)",
+
+  "homePage.available": "متاح",
+  "homePage.notAvailable": "غير متاح",
+  "homePage.returned": "تم الإرجاع",
+  "homePage.notReturned": "لم يُرجع",
+
+  "homePage.copies": "نسخ",
+  "homePage.borrowDate": "تاريخ الاستعارة",
+  "homePage.dueDate": "تاريخ الاستحقاق",
+  "homePage.viewDetails": "عرض التفاصيل",
+
+  "homePage.description": "الوصف",
+  "homePage.borrow": "استعارة الكتاب",
+  "homePage.return": "إرجاع الكتاب",
+
+  "toast": "------------------------------------تنبيهات------------------------------------",
+  "toast.borrowed.success": "لقد استعرت {title} للمؤلف {author} لمدة 5 أيام",
+  "toast.return.success": "لقد أعدت {title} للمؤلف {author}",
+  "toast.wrongCredentials": "بيانات اعتماد خاطئة",
+  "toast.createAccount.success": "تم إنشاء الحساب بنجاح!",
+  "toast.createAccount.error": "حدث خطأ ما. الرجاء المحاولة مرة أخرى"
+}

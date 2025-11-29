@@ -7,6 +7,7 @@ import { Box, styled, Typography } from "@mui/material";
 import { Loader } from "@utils/loader/Loader";
 import { LuLibrary } from "react-icons/lu";
 import { useSignin } from "./useSignin";
+import { FormattedMessage } from "react-intl";
 
 export const Container = styled("div")(({ theme }) => ({
   background: theme.palette.background.default,
@@ -89,7 +90,7 @@ export default function SigninPage() {
               marginTop: "4px",
             }}
           >
-            Welcome to LibraryHub
+            <FormattedMessage id="signinPage.welcome" />
           </Typography>
           <Typography
             sx={{
@@ -100,7 +101,7 @@ export default function SigninPage() {
               marginTop: "4px",
             }}
           >
-            Sign in to your account
+            <FormattedMessage id="signinPage.signinToYourAccount" />
           </Typography>
         </Box>
 
@@ -124,8 +125,8 @@ export default function SigninPage() {
               borderRadius: "10px",
             }}
           >
-            <AppTab label="Sign In" />
-            <AppTab label="Sign Up" />
+            <AppTab label={<FormattedMessage id="signinPage.signIn" />} />
+            <AppTab label={<FormattedMessage id="signinPage.signUp" />} />
           </AppTabs>
         </Box>
 
@@ -139,7 +140,7 @@ export default function SigninPage() {
             <>
               <AppInputFiled
                 fullWidth
-                label="Email"
+                label="signinPage.label.email"
                 type="email"
                 name="email"
                 value={email}
@@ -150,7 +151,7 @@ export default function SigninPage() {
               <AppInputFiled
                 name="password"
                 fullWidth
-                label={"Password"}
+                label="signinPage.label.password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -163,7 +164,7 @@ export default function SigninPage() {
                 fullWidth
                 sx={{ mt: 2 }}
               >
-                Sign In
+                <FormattedMessage id="signinPage.signIn" />
               </AppButton>
             </>
           )}
@@ -174,7 +175,7 @@ export default function SigninPage() {
               <AppInputFiled
                 fullWidth
                 name="fullName"
-                label={"full Name"}
+                label="signinPage.label.fullName"
                 type="text"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
@@ -184,7 +185,7 @@ export default function SigninPage() {
               <AppInputFiled
                 name="email"
                 fullWidth
-                label={"Email"}
+                label="signinPage.label.email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -194,7 +195,7 @@ export default function SigninPage() {
               <AppInputFiled
                 name="password"
                 fullWidth
-                label={"Password"}
+                label="signinPage.label.password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -207,7 +208,7 @@ export default function SigninPage() {
                 fullWidth
                 sx={{ mt: 2 }}
               >
-                Sign Up
+                <FormattedMessage id="signinPage.signUp" />
               </AppButton>
             </>
           )}

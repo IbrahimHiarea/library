@@ -11,6 +11,7 @@ import { LuLibrary } from "react-icons/lu";
 import { useHome } from "./useHome";
 import { NoResult } from "@utils/noResult";
 import { Loader } from "@utils/loader/Loader";
+import { FormattedMessage, useIntl } from "react-intl";
 
 export default function HomePage() {
   // *@ Component Hooks
@@ -31,6 +32,7 @@ export default function HomePage() {
 
     isLoading,
   } = useHome();
+  const { formatMessage } = useIntl();
 
   if (isLoading) {
     return (
@@ -85,7 +87,12 @@ export default function HomePage() {
           zIndex={10}
           sx={{ transform: "translate(-50%, -50%)" }}
         >
-          <Stack direction="row" spacing={2} alignItems="center">
+          <Stack
+            direction="row"
+            spacing={2}
+            alignItems="center"
+            sx={{ direction: "rtl" }}
+          >
             <Typography sx={{ color: (theme) => theme.palette.primary.main }}>
               <LuLibrary size={48} />
             </Typography>
@@ -111,7 +118,7 @@ export default function HomePage() {
                   : theme.palette.text.secondary,
             }}
           >
-            Discover, borrow, and enjoy a world of books
+            <FormattedMessage id="homePage.subTitle" />
           </Typography>
         </Box>
       </Box>
@@ -130,7 +137,7 @@ export default function HomePage() {
             color="text.primary"
             fontWeight={500}
           >
-            Your Library
+            <FormattedMessage id="homePage.yourLib" />
           </Typography>
 
           <Box
@@ -159,8 +166,12 @@ export default function HomePage() {
               borderRadius: "10px",
             }}
           >
-            <AppTab label="Browse Books" />
-            <AppTab label={`My Books (${borrowedBooks.length})`} />
+            <AppTab label={<FormattedMessage id="homePage.browseBooks" />} />
+            <AppTab
+              label={`${formatMessage({ id: "homePage.myBooks" })} (${
+                borrowedBooks.length
+              })`}
+            />
           </AppTabs>
         </Box>
 
@@ -179,7 +190,9 @@ export default function HomePage() {
             type="text"
             name="search"
             value={search}
-            placeholder={`Search By ${searchBy}`}
+            placeholder={`${formatMessage({
+              id: "homePage.searchBy",
+            })} ${formatMessage({ id: `homePage.${searchBy}` })}`}
             onChange={(e) => setSearch(e.target.value)}
             startIcon={<CiSearch />}
           />
@@ -191,9 +204,15 @@ export default function HomePage() {
               setSearchBy(e.target.value), setSearch("");
             }}
             options={[
-              { label: "title", value: "title" },
-              { label: "author", value: "author" },
-              { label: "ISBN", value: "isbn" },
+              {
+                label: formatMessage({ id: "homePage.title" }),
+                value: "title",
+              },
+              {
+                label: formatMessage({ id: "homePage.author" }),
+                value: "author",
+              },
+              { label: formatMessage({ id: "homePage.isbn" }), value: "isbn" },
             ]}
             sx={{ width: { xs: "100%", sm: "40%", md: "20%" } }}
           />

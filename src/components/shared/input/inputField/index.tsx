@@ -5,6 +5,7 @@ import {
   type Theme,
 } from "@mui/material";
 import { type ChangeEvent, type FC } from "react";
+import { useIntl } from "react-intl";
 
 interface AppInputFiledProps {
   name: string;
@@ -35,10 +36,12 @@ export const AppInputFiled: FC<AppInputFiledProps> = ({
   fullWidth = true,
   required = false,
 }) => {
+  const { formatMessage } = useIntl();
+
   return (
     <TextField
       name={name}
-      label={label}
+      label={label ? formatMessage({ id: label }) : ""}
       type={type}
       value={value}
       onChange={onChange}

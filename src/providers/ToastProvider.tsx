@@ -1,16 +1,19 @@
 import { type ReactNode } from "react";
 import { toast, Toaster } from "sonner";
+import { useLanguage } from "./LanguageProvider";
 
 interface ToastProviderProps {
   children: ReactNode;
 }
 
 export const ToastProvider = ({ children }: ToastProviderProps) => {
+  const { language } = useLanguage();
+
   return (
     <>
       {children}
       <Toaster
-        position="bottom-right"
+        position={language === "ar" ? "bottom-left" : "bottom-right"}
         richColors
         toastOptions={{
           duration: 4000,

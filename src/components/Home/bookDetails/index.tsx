@@ -17,6 +17,7 @@ import { FaStar } from "react-icons/fa";
 import { GoPerson } from "react-icons/go";
 import { IoMdClose } from "react-icons/io";
 import { LuBook } from "react-icons/lu";
+import { FormattedMessage, useIntl } from "react-intl";
 import type { IBook, IBorrowedBook } from "types/books";
 import type { IUser } from "types/user";
 
@@ -53,6 +54,8 @@ export function BookDetails({
   } = book!;
 
   const { user } = useAuth();
+  const { formatMessage } = useIntl();
+
   const isAvailable = availableCopies > 0;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -92,7 +95,15 @@ export function BookDetails({
       await refetchBooks();
       await refetchBorrowed();
       onClose();
-      toastSuccess(`You have borrowed ${title} by ${author} for 5 days`);
+      toastSuccess(
+        formatMessage(
+          { id: "toast.borrowed.success" },
+          {
+            title: title,
+            author: author,
+          }
+        )
+      );
     } catch (error) {
       console.error("Borrow book failed:", error);
       throw new Error("Something went wrong while borrowing the book.");
@@ -135,7 +146,15 @@ export function BookDetails({
 
       // 5. Close modal & notify
       onClose();
-      toastSuccess(`You have returned ${title} by ${author}.`);
+      toastSuccess(
+        formatMessage(
+          { id: "toast.return.success" },
+          {
+            title: title,
+            author: author,
+          }
+        )
+      );
     } catch (error) {
       console.error("Return book failed:", error);
       throw new Error("Something went wrong while returning the book.");
@@ -250,13 +269,15 @@ export function BookDetails({
                     p: "2px 10px",
                   }}
                 >
-                  {!myBooks && isAvailable
-                    ? "Available"
-                    : !myBooks && !isAvailable
-                    ? "Not Available"
-                    : myBooks && borrowedBook?.returned
-                    ? "Returned"
-                    : "Not Returned"}
+                  {!myBooks && isAvailable ? (
+                    <FormattedMessage id="homePage.available" />
+                  ) : !myBooks && !isAvailable ? (
+                    <FormattedMessage id="homePage.notAvailable" />
+                  ) : myBooks && borrowedBook?.returned ? (
+                    <FormattedMessage id="homePage.returned" />
+                  ) : (
+                    <FormattedMessage id="homePage.notReturned" />
+                  )}
                 </Typography>
               </Box>
             </Box>
@@ -270,11 +291,12 @@ export function BookDetails({
                 display="flex"
                 gap={1}
               >
-                <LuBook size={16} /> ISBN: {isbn}
+                <LuBook size={16} /> <FormattedMessage id="homePage.isbn" /> :{" "}
+                {isbn}
               </Typography>
 
               <Typography fontSize={18} color="text.main" mt={2}>
-                Description
+                <FormattedMessage id="homePage.description" />
               </Typography>
               <Typography fontSize={16} color="text.secondary" mt={2}>
                 {description}
@@ -286,7 +308,8 @@ export function BookDetails({
                 color="text.secondary"
                 mt={2}
               >
-                Copies : {availableCopies} / {totalCopies} available
+                <FormattedMessage id="homePage.copies" /> : {availableCopies} /{" "}
+                {totalCopies} <FormattedMessage id="homePage.available" />
               </Typography>
 
               <Typography
@@ -295,7 +318,7 @@ export function BookDetails({
                 color="text.secondary"
                 mt={2}
               >
-                Borrow Date :{" "}
+                <FormattedMessage id="homePage.borrowDate" /> :{" "}
                 {new Date(borrowedBook?.borrowedAt ?? "").toUTCString()}
               </Typography>
 
@@ -305,7 +328,8 @@ export function BookDetails({
                 color="text.secondary"
                 mt={2}
               >
-                Due Date : {new Date(borrowedBook?.dueDate ?? "").toUTCString()}
+                <FormattedMessage id="homePage.dueDate" /> :{" "}
+                {new Date(borrowedBook?.dueDate ?? "").toUTCString()}
               </Typography>
             </Box>
 
@@ -330,7 +354,11 @@ export function BookDetails({
                 }
                 onClick={!myBooks ? handleBarrowBook : handleReturnBook}
               >
-                {!myBooks ? "Borrow Book" : "Return Book"}
+                {!myBooks ? (
+                  <FormattedMessage id="homePage.borrow" />
+                ) : (
+                  <FormattedMessage id="homePage.return" />
+                )}
               </AppButton>
             </Box>
           </DialogContent>
