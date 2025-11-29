@@ -77,7 +77,6 @@ export default function SigninPage() {
               fontWeight: 700,
               margin: 0,
               marginBottom: "8px",
-              direction: "rtl",
             }}
           >
             <LuLibrary /> LibraryHub

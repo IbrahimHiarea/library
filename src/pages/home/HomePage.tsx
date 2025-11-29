@@ -87,12 +87,7 @@ export default function HomePage() {
           zIndex={10}
           sx={{ transform: "translate(-50%, -50%)" }}
         >
-          <Stack
-            direction="row"
-            spacing={2}
-            alignItems="center"
-            sx={{ direction: "rtl" }}
-          >
+          <Stack direction="row" spacing={2} alignItems="center">
             <Typography sx={{ color: (theme) => theme.palette.primary.main }}>
               <LuLibrary size={48} />
             </Typography>

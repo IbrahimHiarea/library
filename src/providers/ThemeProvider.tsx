@@ -91,8 +91,15 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
         main: mode === "light" ? "#2196f3" : "#64b5f6",
       },
     };
+    const typography = {
+      fontFamily: `"Roboto", "Cairo", sans-serif`,
+      h1: { fontFamily: `"Roboto", "Cairo", sans-serif` },
+      h2: { fontFamily: `"Roboto", "Cairo", sans-serif` },
+      body1: { fontFamily: `"Roboto", "Cairo", sans-serif` },
+      button: { fontFamily: `"Roboto", "Cairo", sans-serif` },
+    };
 
-    return createTheme({ palette, direction });
+    return createTheme({ palette, direction, typography });
   }, [mode, direction]);
 
   return (
