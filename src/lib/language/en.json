@@ -37,11 +37,17 @@
   "homePage.borrow": "Borrow Book",
   "homePage.return": "Return Book",
 
+  "homePage.empty": "You haven't borrowed any books yet",
+
   "toast": "------------------------------------toast------------------------------------",
   "toast.borrowed.success": "You have borrowed {title} by {author} for 5 days",
   "toast.return.success": "You have returned {title} by {author}",
 
   "toast.wrongCredentials": "Wrong credentials",
   "toast.createAccount.success": "Account created successfully!",
-  "toast.createAccount.error": "Something went wrong. Please try again"
+  "toast.createAccount.error": "Something went wrong. Please try again",
+
+  "notFoundPage": "------------------------------------notFoundPage------------------------------------",
+  "notFoundPage.oops": "Oops! Page not found",
+  "notFoundPage.returnHome": "Return to Home"
 }

@@ -238,7 +238,7 @@ export default function HomePage() {
                 </Grid>
               ))
           ) : tab === 1 && borrowedBooks.length === 0 ? (
-            <NoResult text="You haven't borrowed any books yet" />
+            <NoResult text="homePage.empty" />
           ) : (
             borrowedBooks
               ?.filter((borrowedBook) => {

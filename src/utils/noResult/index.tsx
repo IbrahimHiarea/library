@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { LuLibrary } from "react-icons/lu";
+import { FormattedMessage } from "react-intl";
 
 export function NoResult({ text }: { text: string }) {
   return (
@@ -18,7 +19,7 @@ export function NoResult({ text }: { text: string }) {
     >
       <LuLibrary size={40} />
       <Typography variant="h2" fontSize={24} color="text.secondary">
-        {text}
+        <FormattedMessage id={text ?? ""} />
       </Typography>
     </Box>
   );

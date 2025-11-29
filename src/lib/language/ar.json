@@ -37,10 +37,16 @@
   "homePage.borrow": "استعارة الكتاب",
   "homePage.return": "إرجاع الكتاب",
 
+  "homePage.empty": "لم تستعِر أي كتب بعد",
+
   "toast": "------------------------------------تنبيهات------------------------------------",
   "toast.borrowed.success": "لقد استعرت {title} للمؤلف {author} لمدة 5 أيام",
   "toast.return.success": "لقد أعدت {title} للمؤلف {author}",
   "toast.wrongCredentials": "بيانات اعتماد خاطئة",
   "toast.createAccount.success": "تم إنشاء الحساب بنجاح!",
-  "toast.createAccount.error": "حدث خطأ ما. الرجاء المحاولة مرة أخرى"
+  "toast.createAccount.error": "حدث خطأ ما. الرجاء المحاولة مرة أخرى",
+
+  "notFoundPage": "------------------------------------صفحة غير موجودة------------------------------------",
+  "notFoundPage.oops": "عذرًا! الصفحة غير موجودة",
+  "notFoundPage.returnHome": "العودة إلى الصفحة الرئيسية"
 }

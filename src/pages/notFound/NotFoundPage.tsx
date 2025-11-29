@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { FormattedMessage } from "react-intl";
 
 export default function NotFoundPage() {
   return (
@@ -23,7 +24,7 @@ export default function NotFoundPage() {
       </Typography>
 
       <Typography variant="h2" fontSize={20} color="text.secondary">
-        Oops! Page not found
+        <FormattedMessage id="notFoundPage.oops" />
       </Typography>
 
       <a href="/" style={{ textDecoration: "none" }}>
@@ -34,7 +35,7 @@ export default function NotFoundPage() {
             color: (theme) => theme.palette.primary.main,
           }}
         >
-          Return to Home
+          <FormattedMessage id="notFoundPage.returnHome" />
         </Typography>
       </a>
     </Box>
