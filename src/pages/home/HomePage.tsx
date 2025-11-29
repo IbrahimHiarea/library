@@ -93,7 +93,7 @@ export default function HomePage() {
             <Typography
               variant="h1"
               fontWeight="bold"
-              color="text.primary"
+              color={"white"}
               sx={{ letterSpacing: "2px", fontSize: { xs: 40, md: 48 } }}
             >
               LibraryHub
@@ -101,9 +101,15 @@ export default function HomePage() {
           </Stack>
           <Typography
             variant="h6"
-            color="text.secondary"
+            color={"text.secondary"}
             maxWidth={600}
-            sx={{ fontSize: { xs: 18, md: 20 } }}
+            sx={{
+              fontSize: { xs: 18, md: 20 },
+              color: (theme) =>
+                theme.palette.mode === "light"
+                  ? "white"
+                  : theme.palette.text.secondary,
+            }}
           >
             Discover, borrow, and enjoy a world of books
           </Typography>

@@ -228,7 +228,6 @@ export function BookDetails({
                   <FaStar color="#fbbf24" /> {rate}
                 </Typography>
                 <Typography
-                  display={myBooks ? "none" : ""}
                   sx={{
                     color: (theme) =>
                       (!myBooks && isAvailable) ||

@@ -5,7 +5,44 @@
       "email": "ibrahim@gmail.com",
       "password": "123456",
       "fullName": "Ibrahim",
-      "borrowedBooks": []
+      "borrowedBooks": [
+        {
+          "id": "mik82c1gzvep0dctb9",
+          "bookId": "7ff6411b-dc26-4b59-80d2-97a6d57f625e",
+          "book": {
+            "id": "7ff6411b-dc26-4b59-80d2-97a6d57f625e",
+            "title": "The Catcher in the Rye",
+            "author": "J.D. Salinger",
+            "isbn": "978-0316769174",
+            "description": "A story about teenage rebellion and alienation",
+            "coverImage": "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=600&fit=crop",
+            "availableCopies": 4,
+            "totalCopies": 5,
+            "rate": 4.4
+          },
+          "borrowedAt": "2025-11-29T11:42:41.524Z",
+          "dueDate": "2025-12-04T11:42:41.524Z",
+          "returned": false
+        },
+        {
+          "id": "mik83j5cn9p94608i7",
+          "bookId": "c05aabf0-bf35-45c1-b0f3-1c7ee6a6dd4c",
+          "book": {
+            "id": "c05aabf0-bf35-45c1-b0f3-1c7ee6a6dd4c",
+            "title": "1984",
+            "author": "George Orwell",
+            "isbn": "978-0451524935",
+            "description": "A dystopian social science fiction novel",
+            "coverImage": "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=400&h=600&fit=crop",
+            "availableCopies": 4,
+            "totalCopies": 5,
+            "rate": 3.1
+          },
+          "borrowedAt": "2025-11-29T11:43:37.392Z",
+          "dueDate": "2025-12-04T11:43:37.392Z",
+          "returned": true
+        }
+      ]
     }
   ],
   "books": [
@@ -27,7 +64,7 @@
       "isbn": "978-0316769174",
       "description": "A story about teenage rebellion and alienation",
       "coverImage": "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=600&fit=crop",
-      "availableCopies": 5,
+      "availableCopies": 4,
       "totalCopies": 5,
       "rate": 4.4
     },

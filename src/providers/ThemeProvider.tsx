@@ -41,9 +41,9 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     const palette = {
       mode,
       primary: {
-        main: mode === "light" ? "#1976d2" : "#1d64c9",
-        light: mode === "light" ? "#42a5f5" : "#1d64c9",
-        dark: mode === "light" ? "#1565c0" : "#163969",
+        main: mode === "light" ? "#ee932b" : "#1d64c9",
+        light: mode === "light" ? "#ee932b" : "#1d64c9",
+        dark: mode === "light" ? "#875317ff" : "#163969",
         contrastText: "#fff",
       },
       secondary: {
@@ -59,18 +59,18 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
       },
       text: {
         primary: mode === "light" ? "#1D2530" : "#fff",
-        secondary: mode === "light" ? "#555" : "#98a4b3",
+        secondary: mode === "light" ? "#1D2530" : "#98a4b3",
       },
       success: {
-        main: mode === "light" ? "#4caf50" : "#81c784",
-        dark: mode === "light" ? "#4caf50" : "#1e3335",
+        main: mode === "light" ? "#1e3335" : "#81c784",
+        dark: mode === "light" ? "#81c784" : "#1e3335",
       },
       error: {
-        main: mode === "light" ? "#f44336" : "#e57373",
-        dark: mode === "light" ? "#f44336" : "#292631",
+        main: mode === "light" ? "#292631" : "#e57373",
+        dark: mode === "light" ? "#e57373" : "#292631",
       },
       warning: {
-        main: mode === "light" ? "#ff9800" : "#ffb74d",
+        main: mode === "light" ? "#ffb74d" : "#ffb74d",
       },
       info: {
         main: mode === "light" ? "#2196f3" : "#64b5f6",
