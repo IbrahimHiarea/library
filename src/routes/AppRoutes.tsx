@@ -11,6 +11,9 @@ const SigninPage = lazy(() => import("@pages/auth/SigninPage"));
 // * Home
 const HomePage = lazy(() => import("@pages/home/HomePage"));
 
+// * Not Found
+const NotFoundPage = lazy(() => import("@pages/notFound/NotFoundPage"));
+
 export const AppRoutes = () => {
   return (
     <BrowserRouter>
@@ -37,8 +40,7 @@ export const AppRoutes = () => {
         />
 
         {/* Catch all */}
-        {/* // TODO  */}
-        <Route path="*" element={<div>Page Not Found</div>} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
