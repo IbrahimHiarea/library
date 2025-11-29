@@ -20,6 +20,7 @@ export const Signout = () => {
         border: "1px solid",
         borderColor: (theme) => theme.palette.text.secondary,
         borderRadius: "10px",
+        fontSize: { xs: 14, md: 16 },
 
         "&:hover": {
           backgroundColor: (theme) => theme.palette.primary.main,

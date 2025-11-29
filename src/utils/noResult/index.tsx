@@ -13,6 +13,7 @@ export function NoResult({ text }: { text: string }) {
         width: "100%",
         minHeight: "300px",
         color: (theme) => theme.palette.text.secondary,
+        textAlign: "center",
       }}
     >
       <LuLibrary size={40} />

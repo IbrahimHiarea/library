@@ -5,44 +5,7 @@
       "email": "ibrahim@gmail.com",
       "password": "123456",
       "fullName": "Ibrahim",
-      "borrowedBooks": [
-        {
-          "id": "mik5y483wqg0doekddb",
-          "bookId": "c05aabf0-bf35-45c1-b0f3-1c7ee6a6dd4c",
-          "book": {
-            "id": "c05aabf0-bf35-45c1-b0f3-1c7ee6a6dd4c",
-            "title": "1984",
-            "author": "George Orwell",
-            "isbn": "978-0451524935",
-            "description": "A dystopian social science fiction novel",
-            "coverImage": "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=400&h=600&fit=crop",
-            "availableCopies": 4,
-            "totalCopies": 5,
-            "rate": 3.1
-          },
-          "borrowedAt": "2025-11-29T10:43:25.539Z",
-          "dueDate": "2025-12-04T10:43:25.539Z",
-          "returned": true
-        },
-        {
-          "id": "mik6gyr7crhy329jg7e",
-          "bookId": "f0d3f188-39c8-408e-b1bd-37d44d493081",
-          "book": {
-            "id": "f0d3f188-39c8-408e-b1bd-37d44d493081",
-            "title": "Pride and Prejudice",
-            "author": "Jane Austen",
-            "isbn": "978-0141439518",
-            "description": "A romantic novel of manners",
-            "coverImage": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop",
-            "availableCopies": 4,
-            "totalCopies": 5,
-            "rate": 4.1
-          },
-          "borrowedAt": "2025-11-29T10:58:04.915Z",
-          "dueDate": "2025-12-04T10:58:04.915Z",
-          "returned": true
-        }
-      ]
+      "borrowedBooks": []
     }
   ],
   "books": [

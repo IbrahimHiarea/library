@@ -93,20 +93,24 @@ export default function HomePage() {
             <Typography
               variant="h1"
               fontWeight="bold"
-              fontSize={48}
               color="text.primary"
-              sx={{ letterSpacing: "2px" }}
+              sx={{ letterSpacing: "2px", fontSize: { xs: 40, md: 48 } }}
             >
               LibraryHub
             </Typography>
           </Stack>
-          <Typography variant="h6" color="text.secondary" maxWidth={600}>
+          <Typography
+            variant="h6"
+            color="text.secondary"
+            maxWidth={600}
+            sx={{ fontSize: { xs: 18, md: 20 } }}
+          >
             Discover, borrow, and enjoy a world of books
           </Typography>
         </Box>
       </Box>
 
-      <Box px={8} py={4}>
+      <Box px={{ xs: 2, md: 8 }} py={{ xs: 2, md: 4 }}>
         {/* Header */}
         <Box
           display={"flex"}
@@ -116,7 +120,7 @@ export default function HomePage() {
         >
           <Typography
             variant="h2"
-            fontSize={24}
+            fontSize={{ xs: 18, md: 24 }}
             color="text.primary"
             fontWeight={500}
           >
@@ -145,7 +149,7 @@ export default function HomePage() {
             scrollButtons={false}
             sx={{
               backgroundColor: "#2d3643",
-              width: "500px",
+              width: { xs: "100%", md: "500px" },
               borderRadius: "10px",
             }}
           >
@@ -159,8 +163,9 @@ export default function HomePage() {
           sx={{
             display: "flex",
             justifyContent: "center",
-            gap: "10px",
+            gap: { xs: "0px", sm: "10px" },
             mb: 2,
+            flexDirection: { xs: "column", sm: "row" },
           }}
         >
           <AppInputFiled
@@ -184,7 +189,7 @@ export default function HomePage() {
               { label: "author", value: "author" },
               { label: "ISBN", value: "isbn" },
             ]}
-            sx={{ width: "20%" }}
+            sx={{ width: { xs: "100%", sm: "40%", md: "20%" } }}
           />
         </Box>
 
@@ -199,7 +204,7 @@ export default function HomePage() {
                 return value.includes(search.toLowerCase());
               })
               ?.map((book) => (
-                <Grid key={book.id} size={4}>
+                <Grid key={book.id} size={{ xs: 12, sm: 6, md: 4 }}>
                   <BookCard
                     book={book}
                     handleOnClick={handleOnClick}
@@ -219,7 +224,10 @@ export default function HomePage() {
                 return value.includes(search.toLowerCase());
               })
               ?.map((borrowedBook, index) => (
-                <Grid key={borrowedBook.book.id + index} size={4}>
+                <Grid
+                  key={borrowedBook.book.id + index}
+                  size={{ xs: 12, sm: 6, md: 4 }}
+                >
                   <BookCard
                     book={borrowedBook.book}
                     handleOnClick={handleOnClick}
