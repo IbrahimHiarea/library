@@ -29,15 +29,15 @@ A simple and modern Library Management System where users can register, log in, 
 
 You need **two terminals** running at the same time:
 
-### Terminal 1 – Start the mock backend (json-server)
-
-```bash
-npm run serve-json
-```
-
-### Terminal 2 – Start the frontend (Vite dev server)
+### Terminal 1 – Start the frontend (Vite dev server)
 
 ```bash
 npm install           # only the first time
 npm run dev
+```
+
+### Terminal 2 – Start the mock backend (json-server)
+
+```bash
+npm run serve-json
 ```
