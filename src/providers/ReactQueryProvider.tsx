@@ -5,13 +5,12 @@ interface QueryProviderProps {
   children: ReactNode;
 }
 
-// Create a global query client
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: false, // optional default settings
+      refetchOnWindowFocus: false,
       retry: 1,
-      staleTime: 1000 * 60, // 1 min
+      staleTime: 1000 * 60,
     },
   },
 });

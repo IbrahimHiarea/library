@@ -11,7 +11,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { useLanguage } from "./LanguageProvider"; // import your language context
+import { useLanguage } from "./LanguageProvider";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import rtlPlugin from "stylis-plugin-rtl";
@@ -42,7 +42,6 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const toggleTheme = () =>
     setMode((prev) => (prev === "light" ? "dark" : "light"));
 
-  // Create RTL cache for Emotion
   const cacheRtl = useMemo(
     () =>
       createCache({

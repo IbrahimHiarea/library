@@ -31,7 +31,7 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
 
   useEffect(() => {
     localStorage.setItem("language", language);
-    document.documentElement.dir = direction; // set HTML direction
+    document.documentElement.dir = direction;
   }, [language, direction]);
 
   const changeLanguage = (lang: LanguageType) => setLanguage(lang);

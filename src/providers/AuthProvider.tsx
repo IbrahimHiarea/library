@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     localStorage.clear();
   };
 
-  const isAuthenticated = !!user; // true if user exists
+  const isAuthenticated = !!user; // * true if user exists
 
   return (
     <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
