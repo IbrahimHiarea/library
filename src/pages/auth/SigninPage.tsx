@@ -4,6 +4,7 @@ import { ThemeToggleButton } from "@components/shared/buttons/themeButton";
 import { AppInputFiled } from "@components/shared/input/inputField";
 import { AppTab, AppTabs } from "@components/shared/tabs";
 import { Box, styled, Typography } from "@mui/material";
+import { Loader } from "@utils/loader/Loader";
 import { LuLibrary } from "react-icons/lu";
 import { useSignin } from "./useSignin";
 
@@ -22,6 +23,7 @@ export default function SigninPage() {
     email,
     fullName,
     password,
+    isLoading,
 
     setEmail,
     setFullName,
@@ -30,6 +32,18 @@ export default function SigninPage() {
     handleChange,
     handleSignIn,
   } = useSignin();
+
+  if (isLoading) {
+    return (
+      <Box
+        sx={{
+          backgroundColor: (theme) => theme.palette.background.default,
+        }}
+      >
+        <Loader sx={{ height: "100vh" }} />
+      </Box>
+    );
+  }
 
   return (
     <Container sx={{ position: "relative" }}>

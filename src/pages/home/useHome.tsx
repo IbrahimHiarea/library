@@ -26,6 +26,8 @@ export function useHome() {
   const [selectedBorrowedBook, setSelectedBorrowedBook] =
     useState<IBorrowedBook>();
 
+  const [isLoading, setIsLoading] = useState(true);
+
   // *@ Component Functions
   // * Handle Tab Change
   const handleChange = useCallback(
@@ -49,6 +51,7 @@ export function useHome() {
 
   // * Get the books
   const handleGetBooks = async () => {
+    setIsLoading(true);
     try {
       const res = await axiosInstance.get<IBook[]>(API_URL.books, {
         params: search ? { [searchBy]: search } : undefined,
@@ -57,10 +60,12 @@ export function useHome() {
     } catch (error) {
       console.error("Failed to fetch books:", error);
     }
+    setIsLoading(false);
   };
 
   // * Get My Borrowed Books
   const handleGetBorrowedBooks = async () => {
+    setIsLoading(true);
     try {
       const res = await axiosInstance.get<{ borrowedBooks?: IBorrowedBook[] }>(
         `${API_URL.user}/${user?.id}`
@@ -70,6 +75,7 @@ export function useHome() {
     } catch (error) {
       console.error("Failed to fetch borrowed books:", error);
     }
+    setIsLoading(false);
   };
 
   // *@ Component Effects
@@ -107,5 +113,6 @@ export function useHome() {
     handleOnClick,
 
     BookDetailsModal,
+    isLoading,
   };
 }

@@ -10,6 +10,7 @@ import { CiSearch } from "react-icons/ci";
 import { LuLibrary } from "react-icons/lu";
 import { useHome } from "./useHome";
 import { NoResult } from "@utils/noResult";
+import { Loader } from "@utils/loader/Loader";
 
 export default function HomePage() {
   // *@ Component Hooks
@@ -27,7 +28,21 @@ export default function HomePage() {
     handleOnClick,
 
     BookDetailsModal,
+
+    isLoading,
   } = useHome();
+
+  if (isLoading) {
+    return (
+      <Box
+        sx={{
+          backgroundColor: (theme) => theme.palette.background.default,
+        }}
+      >
+        <Loader sx={{ height: "100vh" }} />
+      </Box>
+    );
+  }
 
   return (
     <Box

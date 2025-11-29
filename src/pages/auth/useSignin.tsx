@@ -14,6 +14,7 @@ export function useSignin() {
 
   // *@ Component States
   const [tab, setTab] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   // * Form states
   const [email, setEmail] = useState("");
@@ -35,6 +36,7 @@ export function useSignin() {
   // * Handle SignIn
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       if (tab === 0) {
         /// Login
@@ -81,6 +83,7 @@ export function useSignin() {
       toast.error("Something went wrong. Please try again.");
       console.error(err);
     }
+    setIsLoading(false);
   };
 
   return {
@@ -88,6 +91,7 @@ export function useSignin() {
     email,
     fullName,
     password,
+    isLoading,
 
     setEmail,
     setPassword,

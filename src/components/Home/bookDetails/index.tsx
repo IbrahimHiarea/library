@@ -11,6 +11,8 @@ import { useAuth } from "@providers/AuthProvider";
 import { toastSuccess } from "@providers/ToastProvider";
 import { API_URL } from "@services/apiUrls";
 import axiosInstance from "@services/axiosInstance";
+import { Loader } from "@utils/loader/Loader";
+import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { GoPerson } from "react-icons/go";
 import { IoMdClose } from "react-icons/io";
@@ -50,13 +52,15 @@ export function BookDetails({
     availableCopies,
   } = book!;
 
+  const { user } = useAuth();
   const isAvailable = availableCopies > 0;
 
-  const { user } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
 
   // *@ Component Function
   // * handle BarrowBook
   const handleBarrowBook = async () => {
+    setIsLoading(true);
     try {
       // 1. Get user borrowedBooks
       const userRes = await axiosInstance.get<IUser>(
@@ -93,10 +97,12 @@ export function BookDetails({
       console.error("Borrow book failed:", error);
       throw new Error("Something went wrong while borrowing the book.");
     }
+    setIsLoading(false);
   };
 
   // * handle returnBook
   const handleReturnBook = async () => {
+    setIsLoading(true);
     try {
       // 1. Get user borrowedBooks
       const userRes = await axiosInstance.get<IUser>(
@@ -134,6 +140,7 @@ export function BookDetails({
       console.error("Return book failed:", error);
       throw new Error("Something went wrong while returning the book.");
     }
+    setIsLoading(false);
   };
 
   return (
@@ -153,177 +160,183 @@ export function BookDetails({
         },
       }}
     >
-      <DialogTitle
-        sx={{
-          display: "flex",
-          alignItems: "flex-start",
-          justifyContent: "space-between",
-          padding: 0,
-          mb: 4,
-        }}
-      >
-        <div>
-          <Typography fontSize={24} variant="h6">
-            {title}
-          </Typography>
-          <Typography
-            variant="h5"
-            fontSize={18}
-            color="text.secondary"
-            mt={1}
-            display={"flex"}
-            gap={1}
-          >
-            <GoPerson />
-            {author}
-          </Typography>
-        </div>
-
-        <IconButton onClick={onClose}>
-          <IoMdClose />
-        </IconButton>
-      </DialogTitle>
-
-      <DialogContent sx={{ p: 0 }}>
-        {/* Cover */}
-
-        <div style={{ height: "250px", width: "100%" }}>
-          <img
-            src={coverImage}
-            alt={title}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              borderRadius: "12px",
-            }}
-          />
-        </div>
-
-        {/* Main Info */}
-        <Box mt={2}>
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Typography
-              fontSize={16}
-              color="text.main"
-              mt={1}
-              display="flex"
-              gap={1}
-            >
-              <FaStar color="#fbbf24" /> {rate}
-            </Typography>
-            <Typography
-              display={myBooks ? "none" : ""}
-              sx={{
-                color: (theme) =>
-                  (!myBooks && isAvailable) ||
-                  (myBooks && borrowedBook?.returned)
-                    ? theme.palette.success.main
-                    : theme.palette.error.main,
-                border: "1px solid",
-                borderColor: (theme) =>
-                  (!myBooks && isAvailable) ||
-                  (myBooks && borrowedBook?.returned)
-                    ? theme.palette.success.main
-                    : theme.palette.error.main,
-                borderRadius: "10px",
-                backgroundColor: (theme) =>
-                  (!myBooks && isAvailable) ||
-                  (myBooks && borrowedBook?.returned)
-                    ? theme.palette.success.dark
-                    : theme.palette.error.dark,
-                fontSize: "12px",
-                p: "2px 10px",
-              }}
-            >
-              {!myBooks && isAvailable
-                ? "Available"
-                : !myBooks && !isAvailable
-                ? "Not Available"
-                : myBooks && borrowedBook?.returned
-                ? "Returned"
-                : "Not Returned"}
-            </Typography>
-          </Box>
-        </Box>
-
-        {/* Extra Fields */}
-        <Box mt={3}>
-          <Typography
-            fontSize={16}
-            color="text.secondary"
-            mt={2}
-            display="flex"
-            gap={1}
-          >
-            <LuBook size={16} /> ISBN: {isbn}
-          </Typography>
-
-          <Typography fontSize={18} color="text.main" mt={2}>
-            Description
-          </Typography>
-          <Typography fontSize={16} color="text.secondary" mt={2}>
-            {description}
-          </Typography>
-
-          <Typography
-            display={myBooks ? "none" : ""}
-            fontSize={16}
-            color="text.secondary"
-            mt={2}
-          >
-            Copies : {availableCopies} / {totalCopies} available
-          </Typography>
-
-          <Typography
-            display={!myBooks ? "none" : ""}
-            fontSize={16}
-            color="text.secondary"
-            mt={2}
-          >
-            Borrow Date :{" "}
-            {new Date(borrowedBook?.borrowedAt ?? "").toUTCString()}
-          </Typography>
-
-          <Typography
-            display={!myBooks ? "none" : ""}
-            fontSize={16}
-            color="text.secondary"
-            mt={2}
-          >
-            Due Date : {new Date(borrowedBook?.dueDate ?? "").toUTCString()}
-          </Typography>
-        </Box>
-
-        <Box mt={3}>
-          <AppButton
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <DialogTitle
             sx={{
-              width: "100%",
-              padding: "8px 16px",
-              backgroundColor: (theme) => theme.palette.background.default,
-              color: (theme) => theme.palette.text.primary,
-              border: "1px solid #333e4d",
-
-              ":hover": {
-                backgroundColor: (theme) => theme.palette.primary.main,
-                borderColor: (theme) => theme.palette.primary.main,
-                transition: "0.3",
-              },
+              display: "flex",
+              alignItems: "flex-start",
+              justifyContent: "space-between",
+              padding: 0,
+              mb: 4,
             }}
-            disabled={
-              (availableCopies === 0 && !myBooks) ||
-              (myBooks && borrowedBook?.returned)
-            }
-            onClick={!myBooks ? handleBarrowBook : handleReturnBook}
           >
-            {!myBooks ? "Borrow Book" : "Return Book"}
-          </AppButton>
-        </Box>
-      </DialogContent>
+            <div>
+              <Typography fontSize={24} variant="h6">
+                {title}
+              </Typography>
+              <Typography
+                variant="h5"
+                fontSize={18}
+                color="text.secondary"
+                mt={1}
+                display={"flex"}
+                gap={1}
+              >
+                <GoPerson />
+                {author}
+              </Typography>
+            </div>
+
+            <IconButton onClick={onClose}>
+              <IoMdClose />
+            </IconButton>
+          </DialogTitle>
+
+          <DialogContent sx={{ p: 0 }}>
+            {/* Cover */}
+
+            <div style={{ height: "250px", width: "100%" }}>
+              <img
+                src={coverImage}
+                alt={title}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: "12px",
+                }}
+              />
+            </div>
+
+            {/* Main Info */}
+            <Box mt={2}>
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Typography
+                  fontSize={16}
+                  color="text.main"
+                  mt={1}
+                  display="flex"
+                  gap={1}
+                >
+                  <FaStar color="#fbbf24" /> {rate}
+                </Typography>
+                <Typography
+                  display={myBooks ? "none" : ""}
+                  sx={{
+                    color: (theme) =>
+                      (!myBooks && isAvailable) ||
+                      (myBooks && borrowedBook?.returned)
+                        ? theme.palette.success.main
+                        : theme.palette.error.main,
+                    border: "1px solid",
+                    borderColor: (theme) =>
+                      (!myBooks && isAvailable) ||
+                      (myBooks && borrowedBook?.returned)
+                        ? theme.palette.success.main
+                        : theme.palette.error.main,
+                    borderRadius: "10px",
+                    backgroundColor: (theme) =>
+                      (!myBooks && isAvailable) ||
+                      (myBooks && borrowedBook?.returned)
+                        ? theme.palette.success.dark
+                        : theme.palette.error.dark,
+                    fontSize: "12px",
+                    p: "2px 10px",
+                  }}
+                >
+                  {!myBooks && isAvailable
+                    ? "Available"
+                    : !myBooks && !isAvailable
+                    ? "Not Available"
+                    : myBooks && borrowedBook?.returned
+                    ? "Returned"
+                    : "Not Returned"}
+                </Typography>
+              </Box>
+            </Box>
+
+            {/* Extra Fields */}
+            <Box mt={3}>
+              <Typography
+                fontSize={16}
+                color="text.secondary"
+                mt={2}
+                display="flex"
+                gap={1}
+              >
+                <LuBook size={16} /> ISBN: {isbn}
+              </Typography>
+
+              <Typography fontSize={18} color="text.main" mt={2}>
+                Description
+              </Typography>
+              <Typography fontSize={16} color="text.secondary" mt={2}>
+                {description}
+              </Typography>
+
+              <Typography
+                display={myBooks ? "none" : ""}
+                fontSize={16}
+                color="text.secondary"
+                mt={2}
+              >
+                Copies : {availableCopies} / {totalCopies} available
+              </Typography>
+
+              <Typography
+                display={!myBooks ? "none" : ""}
+                fontSize={16}
+                color="text.secondary"
+                mt={2}
+              >
+                Borrow Date :{" "}
+                {new Date(borrowedBook?.borrowedAt ?? "").toUTCString()}
+              </Typography>
+
+              <Typography
+                display={!myBooks ? "none" : ""}
+                fontSize={16}
+                color="text.secondary"
+                mt={2}
+              >
+                Due Date : {new Date(borrowedBook?.dueDate ?? "").toUTCString()}
+              </Typography>
+            </Box>
+
+            <Box mt={3}>
+              <AppButton
+                sx={{
+                  width: "100%",
+                  padding: "8px 16px",
+                  backgroundColor: (theme) => theme.palette.background.default,
+                  color: (theme) => theme.palette.text.primary,
+                  border: "1px solid #333e4d",
+
+                  ":hover": {
+                    backgroundColor: (theme) => theme.palette.primary.main,
+                    borderColor: (theme) => theme.palette.primary.main,
+                    transition: "0.3",
+                  },
+                }}
+                disabled={
+                  (availableCopies === 0 && !myBooks) ||
+                  (myBooks && borrowedBook?.returned)
+                }
+                onClick={!myBooks ? handleBarrowBook : handleReturnBook}
+              >
+                {!myBooks ? "Borrow Book" : "Return Book"}
+              </AppButton>
+            </Box>
+          </DialogContent>
+        </>
+      )}
     </Dialog>
   );
 }
