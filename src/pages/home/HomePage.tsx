@@ -9,6 +9,7 @@ import { Box, Grid, Stack, Typography } from "@mui/material";
 import { CiSearch } from "react-icons/ci";
 import { LuLibrary } from "react-icons/lu";
 import { useHome } from "./useHome";
+import { NoResult } from "@utils/noResult";
 
 export default function HomePage() {
   // *@ Component Hooks
@@ -174,41 +175,45 @@ export default function HomePage() {
 
         {/* Books */}
         <Grid container spacing={3} width={"100%"} key={tab}>
-          {tab === 0
-            ? books
-                ?.filter((book) => {
-                  if (!search) return true;
-                  const field = searchBy;
-                  const value = book[field]?.toString().toLowerCase() || "";
-                  return value.includes(search.toLowerCase());
-                })
-                ?.map((book) => (
-                  <Grid key={book.id} size={4}>
-                    <BookCard
-                      book={book}
-                      handleOnClick={handleOnClick}
-                      myBooks={false}
-                    />
-                  </Grid>
-                ))
-            : borrowedBooks
-                ?.filter((borrowedBook) => {
-                  if (!search) return true;
-                  const field = searchBy;
-                  const value =
-                    borrowedBook?.book[field]?.toString().toLowerCase() || "";
-                  return value.includes(search.toLowerCase());
-                })
-                ?.map((borrowedBook, index) => (
-                  <Grid key={borrowedBook.book.id + index} size={4}>
-                    <BookCard
-                      book={borrowedBook.book}
-                      handleOnClick={handleOnClick}
-                      myBooks={true}
-                      borrowedBook={borrowedBook}
-                    />
-                  </Grid>
-                ))}
+          {tab === 0 ? (
+            books
+              ?.filter((book) => {
+                if (!search) return true;
+                const field = searchBy;
+                const value = book[field]?.toString().toLowerCase() || "";
+                return value.includes(search.toLowerCase());
+              })
+              ?.map((book) => (
+                <Grid key={book.id} size={4}>
+                  <BookCard
+                    book={book}
+                    handleOnClick={handleOnClick}
+                    myBooks={false}
+                  />
+                </Grid>
+              ))
+          ) : tab === 1 && borrowedBooks.length === 0 ? (
+            <NoResult text="You haven't borrowed any books yet" />
+          ) : (
+            borrowedBooks
+              ?.filter((borrowedBook) => {
+                if (!search) return true;
+                const field = searchBy;
+                const value =
+                  borrowedBook?.book[field]?.toString().toLowerCase() || "";
+                return value.includes(search.toLowerCase());
+              })
+              ?.map((borrowedBook, index) => (
+                <Grid key={borrowedBook.book.id + index} size={4}>
+                  <BookCard
+                    book={borrowedBook.book}
+                    handleOnClick={handleOnClick}
+                    myBooks={true}
+                    borrowedBook={borrowedBook}
+                  />
+                </Grid>
+              ))
+          )}
         </Grid>
       </Box>
 
