@@ -32,7 +32,7 @@ You need **two terminals** running at the same time:
 ### Terminal 1 – Start the mock backend (json-server)
 
 ```bash
-json-server --watch src/db/db.json --port 5000
+npm run serve-json
 ```
 
 ### Terminal 2 – Start the frontend (Vite dev server)
