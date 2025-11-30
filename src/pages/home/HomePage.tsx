@@ -6,12 +6,12 @@ import { AppInputFiled } from "@components/shared/input/inputField";
 import { AppSelect } from "@components/shared/input/selectField";
 import { AppTab, AppTabs } from "@components/shared/tabs";
 import { Box, Grid, Stack, Typography } from "@mui/material";
+import { Loader } from "@utils/loader/Loader";
+import { NoResult } from "@utils/noResult";
 import { CiSearch } from "react-icons/ci";
 import { LuLibrary } from "react-icons/lu";
-import { useHome } from "./useHome";
-import { NoResult } from "@utils/noResult";
-import { Loader } from "@utils/loader/Loader";
 import { FormattedMessage, useIntl } from "react-intl";
+import { useHome } from "./useHome";
 
 export default function HomePage() {
   // *@ Component Hooks
@@ -20,8 +20,9 @@ export default function HomePage() {
     search,
     searchBy,
 
-    books,
     borrowedBooks,
+    filteredBooks,
+    filteredBorrowedBooks,
 
     handleChange,
     setSearch,
@@ -32,8 +33,10 @@ export default function HomePage() {
 
     isLoading,
   } = useHome();
+
   const { formatMessage } = useIntl();
 
+  // * Handle the loader
   if (isLoading) {
     return (
       <Box
@@ -215,47 +218,36 @@ export default function HomePage() {
 
         {/* Books */}
         <Grid container spacing={3} width={"100%"} key={tab}>
-          {tab === 0 ? (
-            books
-              ?.filter((book) => {
-                if (!search) return true;
-                const field = searchBy;
-                const value = book[field]?.toString().toLowerCase() || "";
-                return value.includes(search.toLowerCase());
-              })
-              ?.map((book) => (
-                <Grid key={book.id} size={{ xs: 12, sm: 6, md: 4 }}>
-                  <BookCard
-                    book={book}
-                    handleOnClick={handleOnClick}
-                    myBooks={false}
-                  />
-                </Grid>
-              ))
+          {tab === 0 && filteredBooks?.length === 0 ? (
+            <NoResult text="homePage.noResult" />
+          ) : tab === 0 ? (
+            filteredBooks?.map((book) => (
+              <Grid key={book.id} size={{ xs: 12, sm: 6, md: 4 }}>
+                <BookCard
+                  book={book}
+                  handleOnClick={handleOnClick}
+                  myBooks={false}
+                />
+              </Grid>
+            ))
           ) : tab === 1 && borrowedBooks.length === 0 ? (
             <NoResult text="homePage.empty" />
+          ) : tab === 1 && filteredBorrowedBooks.length === 0 ? (
+            <NoResult text="homePage.noResult" />
           ) : (
-            borrowedBooks
-              ?.filter((borrowedBook) => {
-                if (!search) return true;
-                const field = searchBy;
-                const value =
-                  borrowedBook?.book[field]?.toString().toLowerCase() || "";
-                return value.includes(search.toLowerCase());
-              })
-              ?.map((borrowedBook, index) => (
-                <Grid
-                  key={borrowedBook.book.id + index}
-                  size={{ xs: 12, sm: 6, md: 4 }}
-                >
-                  <BookCard
-                    book={borrowedBook.book}
-                    handleOnClick={handleOnClick}
-                    myBooks={true}
-                    borrowedBook={borrowedBook}
-                  />
-                </Grid>
-              ))
+            filteredBorrowedBooks?.map((borrowedBook, index) => (
+              <Grid
+                key={borrowedBook.book.id + index}
+                size={{ xs: 12, sm: 6, md: 4 }}
+              >
+                <BookCard
+                  book={borrowedBook.book}
+                  handleOnClick={handleOnClick}
+                  myBooks={true}
+                  borrowedBook={borrowedBook}
+                />
+              </Grid>
+            ))
           )}
         </Grid>
       </Box>

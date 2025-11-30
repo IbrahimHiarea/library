@@ -38,6 +38,7 @@
   "homePage.return": "Return Book",
 
   "homePage.empty": "You haven't borrowed any books yet",
+  "homePage.noResult": "There no result",
 
   "toast": "------------------------------------toast------------------------------------",
   "toast.borrowed.success": "You have borrowed {title} by {author} for 5 days",

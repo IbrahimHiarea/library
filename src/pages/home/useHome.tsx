@@ -2,7 +2,7 @@ import { BookDetails } from "@components/Home/bookDetails";
 import { useAuth } from "@providers/AuthProvider";
 import { API_URL } from "@services/apiUrls";
 import axiosInstance from "@services/axiosInstance";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { IBook, IBorrowedBook } from "types/books";
 
 export function useHome() {
@@ -26,7 +26,30 @@ export function useHome() {
   const [selectedBorrowedBook, setSelectedBorrowedBook] =
     useState<IBorrowedBook>();
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingBooks, setIsLoadingBooks] = useState(true);
+  const [isLoadingBorrowed, setIsLoadingBorrowed] = useState(true);
+
+  const isLoading = isLoadingBooks || isLoadingBorrowed;
+
+  // * search on the books based on search by
+  const filteredBooks = useMemo(() => {
+    return books.filter((book) => {
+      if (!search) return true;
+      const field = searchBy;
+      const value = book[field]?.toString().toLowerCase() || "";
+      return value.includes(search.toLowerCase());
+    });
+  }, [books, search, searchBy]);
+
+  // * search on the borrowed books based on search by
+  const filteredBorrowedBooks = useMemo(() => {
+    return borrowedBooks.filter((borrowedBook) => {
+      if (!search) return true;
+      const field = searchBy;
+      const value = borrowedBook.book[field]?.toString().toLowerCase() || "";
+      return value.includes(search.toLowerCase());
+    });
+  }, [borrowedBooks, search, searchBy]);
 
   // *@ Component Functions
   // * Handle Tab Change
@@ -51,7 +74,7 @@ export function useHome() {
 
   // * Get the books
   const handleGetBooks = async () => {
-    setIsLoading(true);
+    setIsLoadingBooks(true);
     try {
       const res = await axiosInstance.get<IBook[]>(API_URL.books, {
         params: search ? { [searchBy]: search } : undefined,
@@ -60,12 +83,12 @@ export function useHome() {
     } catch (error) {
       console.error("Failed to fetch books:", error);
     }
-    setIsLoading(false);
+    setIsLoadingBooks(false);
   };
 
   // * Get My Borrowed Books
   const handleGetBorrowedBooks = async () => {
-    setIsLoading(true);
+    setIsLoadingBorrowed(true);
     try {
       const res = await axiosInstance.get<{ borrowedBooks?: IBorrowedBook[] }>(
         `${API_URL.user}/${user?.id}`
@@ -75,7 +98,7 @@ export function useHome() {
     } catch (error) {
       console.error("Failed to fetch borrowed books:", error);
     }
-    setIsLoading(false);
+    setIsLoadingBorrowed(false);
   };
 
   // *@ Component Effects
@@ -106,6 +129,8 @@ export function useHome() {
     searchBy,
     books,
     borrowedBooks,
+    filteredBooks,
+    filteredBorrowedBooks,
 
     handleChange,
     setSearch,
