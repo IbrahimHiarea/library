@@ -1,7 +1,6 @@
 import { AuthProvider } from "@providers/AuthProvider";
 import { IntlProvider } from "@providers/IntlProvider";
 import { LanguageProvider } from "@providers/LanguageProvider";
-import { QueryProvider } from "@providers/ReactQueryProvider";
 import { ThemeProvider } from "@providers/ThemeProvider";
 import { ToastProvider } from "@providers/ToastProvider";
 import { AppRoutes } from "@routes/AppRoutes";
@@ -12,13 +11,11 @@ function App() {
       <LanguageProvider>
         <IntlProvider>
           <ThemeProvider>
-            <QueryProvider>
-              <AuthProvider>
-                <ToastProvider>
-                  <AppRoutes />
-                </ToastProvider>
-              </AuthProvider>
-            </QueryProvider>
+            <AuthProvider>
+              <ToastProvider>
+                <AppRoutes />
+              </ToastProvider>
+            </AuthProvider>
           </ThemeProvider>
         </IntlProvider>
       </LanguageProvider>

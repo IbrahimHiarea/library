@@ -5,7 +5,26 @@
       "email": "ibrahim@gmail.com",
       "password": "123456",
       "fullName": "Ibrahim",
-      "borrowedBooks": []
+      "borrowedBooks": [
+        {
+          "id": "milx8wqmjyb7qwet03j",
+          "bookId": "f0d3f188-39c8-408e-b1bd-37d44d493081",
+          "book": {
+            "id": "f0d3f188-39c8-408e-b1bd-37d44d493081",
+            "title": "Pride and Prejudice",
+            "author": "Jane Austen",
+            "isbn": "978-0141439518",
+            "description": "A romantic novel of manners",
+            "coverImage": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop",
+            "availableCopies": 4,
+            "totalCopies": 5,
+            "rate": 4.1
+          },
+          "borrowedAt": "2025-11-30T16:15:24.862Z",
+          "dueDate": "2025-12-05T16:15:24.863Z",
+          "returned": false
+        }
+      ]
     },
     {
       "id": "261f",
@@ -22,7 +41,7 @@
       "isbn": "978-0141439518",
       "description": "A romantic novel of manners",
       "coverImage": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop",
-      "availableCopies": 5,
+      "availableCopies": 4,
       "totalCopies": 5,
       "rate": 4.1
     },
